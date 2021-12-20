@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/nav_msgs";
+package nav_msgs;
+
+import "google/protobuf/timestamp.proto";
+import "std_msgs.proto";
+import "geometry_msgs.proto";
+
+// @inject_field: msg.Package `ros:"nav_msgs"`
+message GridCells {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"float32" rosname:"cell_width"`
+  float cell_width = 2;
+  // @inject_tags: `rostype:"float32" rosname:"cell_height"`
+  float cell_height = 3;
+  // @inject_tags: `rostype:"Point[]" rosname:"cells"`
+  repeated geometry_msgs.Point cells = 4;
+}
+
+// @inject_field: msg.Package `ros:"nav_msgs"`
+message MapMetaData {
+  // @inject_tags: `rostype:"time" rosname:"map_load_time"`
+  google.protobuf.Timestamp map_load_time = 1;
+  // @inject_tags: `rostype:"float32" rosname:"resolution"`
+  float resolution = 2;
+  // @inject_tags: `rostype:"uint32" rosname:"width"`
+  uint32 width = 3;
+  // @inject_tags: `rostype:"uint32" rosname:"height"`
+  uint32 height = 4;
+  // @inject_tags: `rostype:"Pose" rosname:"origin"`
+  geometry_msgs.Pose origin = 5;
+}
+
+// @inject_field: msg.Package `ros:"nav_msgs"`
+message OccupancyGrid {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"MapMetaData" rosname:"info"`
+  MapMetaData info = 2;
+  // @inject_tags: `rostype:"int8[]" rosname:"data"`
+  repeated int32 data = 3;
+}
+
+// @inject_field: msg.Package `ros:"nav_msgs"`
+message Odometry {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string" rosname:"child_frame_id"`
+  string child_frame_id = 2;
+  // @inject_tags: `rostype:"PoseWithCovariance" rosname:"pose"`
+  geometry_msgs.PoseWithCovariance pose = 3;
+  // @inject_tags: `rostype:"TwistWithCovariance" rosname:"twist"`
+  geometry_msgs.TwistWithCovariance twist = 4;
+}
+
+// @inject_field: msg.Package `ros:"nav_msgs"`
+message Path {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"PoseStamped[]" rosname:"poses"`
+  repeated geometry_msgs.PoseStamped poses = 2;
+}
+

@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/trajectory_msgs";
+package trajectory_msgs;
+
+import "std_msgs.proto";
+import "google/protobuf/timestamp.proto";
+import "geometry_msgs.proto";
+
+// @inject_field: msg.Package `ros:"trajectory_msgs"`
+message JointTrajectory {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string[]" rosname:"joint_names"`
+  repeated string joint_names = 2;
+  // @inject_tags: `rostype:"JointTrajectoryPoint[]" rosname:"points"`
+  repeated JointTrajectoryPoint points = 3;
+}
+
+// @inject_field: msg.Package `ros:"trajectory_msgs"`
+message JointTrajectoryPoint {
+  // @inject_tags: `rostype:"float64[]" rosname:"positions"`
+  repeated double positions = 1;
+  // @inject_tags: `rostype:"float64[]" rosname:"velocities"`
+  repeated double velocities = 2;
+  // @inject_tags: `rostype:"float64[]" rosname:"accelerations"`
+  repeated double accelerations = 3;
+  // @inject_tags: `rostype:"float64[]" rosname:"effort"`
+  repeated double effort = 4;
+  // @inject_tags: `rostype:"duration" rosname:"time_from_start"`
+  google.protobuf.Timestamp time_from_start = 5;
+}
+
+// @inject_field: msg.Package `ros:"trajectory_msgs"`
+message MultiDOFJointTrajectory {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string[]" rosname:"joint_names"`
+  repeated string joint_names = 2;
+  // @inject_tags: `rostype:"MultiDOFJointTrajectoryPoint[]" rosname:"points"`
+  repeated MultiDOFJointTrajectoryPoint points = 3;
+}
+
+// @inject_field: msg.Package `ros:"trajectory_msgs"`
+message MultiDOFJointTrajectoryPoint {
+  // @inject_tags: `rostype:"Transform[]" rosname:"transforms"`
+  repeated geometry_msgs.Transform transforms = 1;
+  // @inject_tags: `rostype:"Twist[]" rosname:"velocities"`
+  repeated geometry_msgs.Twist velocities = 2;
+  // @inject_tags: `rostype:"Twist[]" rosname:"accelerations"`
+  repeated geometry_msgs.Twist accelerations = 3;
+  // @inject_tags: `rostype:"duration" rosname:"time_from_start"`
+  google.protobuf.Timestamp time_from_start = 4;
+}
+

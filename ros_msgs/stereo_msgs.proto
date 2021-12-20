@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/stereo_msgs";
+package stereo_msgs;
+
+import "sensor_msgs.proto";
+import "std_msgs.proto";
+
+// @inject_field: msg.Package `ros:"stereo_msgs"`
+message DisparityImage {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Image" rosname:"image"`
+  sensor_msgs.Image image = 2;
+  // @inject_tags: `rostype:"float32" rosname:"f"`
+  float f = 3;
+  // @inject_tags: `rostype:"float32" rosname:"T"`
+  float T = 4;
+  // @inject_tags: `rostype:"RegionOfInterest" rosname:"valid_window"`
+  sensor_msgs.RegionOfInterest valid_window = 5;
+  // @inject_tags: `rostype:"float32" rosname:"min_disparity"`
+  float min_disparity = 6;
+  // @inject_tags: `rostype:"float32" rosname:"max_disparity"`
+  float max_disparity = 7;
+  // @inject_tags: `rostype:"float32" rosname:"delta_d"`
+  float delta_d = 8;
+}
+

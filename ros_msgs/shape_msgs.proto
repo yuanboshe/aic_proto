@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/shape_msgs";
+package shape_msgs;
+
+import "geometry_msgs.proto";
+
+// @inject_field: msg.Package `ros:"shape_msgs"`
+message Mesh {
+  // @inject_tags: `rostype:"MeshTriangle[]" rosname:"triangles"`
+  repeated MeshTriangle triangles = 1;
+  // @inject_tags: `rostype:"Point[]" rosname:"vertices"`
+  repeated geometry_msgs.Point vertices = 2;
+}
+
+// @inject_field: msg.Package `ros:"shape_msgs"`
+message MeshTriangle {
+  // @inject_tags: `rostype:"uint32[3]" rosname:"vertex_indices"`
+  repeated uint32 vertex_indices = 1;
+}
+
+// @inject_field: msg.Package `ros:"shape_msgs"`
+message Plane {
+  // @inject_tags: `rostype:"float64[4]" rosname:"coef"`
+  repeated double coef = 1;
+}
+
+// @inject_field: msg.Package `ros:"shape_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 CONE_RADIUS=1"`
+message SolidPrimitive {
+  // @inject_tags: `rostype:"uint8" rosname:"type"`
+  uint32 type = 1;
+  // @inject_tags: `rostype:"float64[]" rosname:"dimensions"`
+  repeated double dimensions = 2;
+}
+

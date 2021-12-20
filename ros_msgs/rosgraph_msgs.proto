@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/rosgraph_msgs";
+package rosgraph_msgs;
+
+import "google/protobuf/timestamp.proto";
+import "std_msgs.proto";
+
+// @inject_field: msg.Package `ros:"rosgraph_msgs"`
+message Clock {
+  // @inject_tags: `rostype:"time" rosname:"clock"`
+  google.protobuf.Timestamp clock = 1;
+}
+
+// @inject_field: msg.Package `ros:"rosgraph_msgs"`
+// @inject_field: msg.Definitions `ros:"byte FATAL=16"`
+message Log {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"byte" rosname:"level"`
+  int32 level = 2;
+  // @inject_tags: `rostype:"string" rosname:"name"`
+  string name = 3;
+  // @inject_tags: `rostype:"string" rosname:"msg"`
+  string msg = 4;
+  // @inject_tags: `rostype:"string" rosname:"file"`
+  string file = 5;
+  // @inject_tags: `rostype:"string" rosname:"function"`
+  string function = 6;
+  // @inject_tags: `rostype:"uint32" rosname:"line"`
+  uint32 line = 7;
+  // @inject_tags: `rostype:"string[]" rosname:"topics"`
+  repeated string topics = 8;
+}
+
+// @inject_field: msg.Package `ros:"rosgraph_msgs"`
+message TopicStatistics {
+  // @inject_tags: `rostype:"string" rosname:"topic"`
+  string topic = 1;
+  // @inject_tags: `rostype:"string" rosname:"node_pub"`
+  string node_pub = 2;
+  // @inject_tags: `rostype:"string" rosname:"node_sub"`
+  string node_sub = 3;
+  // @inject_tags: `rostype:"time" rosname:"window_start"`
+  google.protobuf.Timestamp window_start = 4;
+  // @inject_tags: `rostype:"time" rosname:"window_stop"`
+  google.protobuf.Timestamp window_stop = 5;
+  // @inject_tags: `rostype:"int32" rosname:"delivered_msgs"`
+  int32 delivered_msgs = 6;
+  // @inject_tags: `rostype:"int32" rosname:"dropped_msgs"`
+  int32 dropped_msgs = 7;
+  // @inject_tags: `rostype:"int32" rosname:"traffic"`
+  int32 traffic = 8;
+  // @inject_tags: `rostype:"duration" rosname:"period_mean"`
+  google.protobuf.Timestamp period_mean = 9;
+  // @inject_tags: `rostype:"duration" rosname:"period_stddev"`
+  google.protobuf.Timestamp period_stddev = 10;
+  // @inject_tags: `rostype:"duration" rosname:"period_max"`
+  google.protobuf.Timestamp period_max = 11;
+  // @inject_tags: `rostype:"duration" rosname:"stamp_age_mean"`
+  google.protobuf.Timestamp stamp_age_mean = 12;
+  // @inject_tags: `rostype:"duration" rosname:"stamp_age_stddev"`
+  google.protobuf.Timestamp stamp_age_stddev = 13;
+  // @inject_tags: `rostype:"duration" rosname:"stamp_age_max"`
+  google.protobuf.Timestamp stamp_age_max = 14;
+}
+

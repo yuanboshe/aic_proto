@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/sound_play";
+package sound_play;
+
+// @inject_field: msg.Package `ros:"sound_play"`
+// @inject_field: msg.Definitions `ros:"int8 PLAY_START=2"`
+message SoundRequest {
+  // @inject_tags: `rostype:"int8" rosname:"sound"`
+  int32 sound = 1;
+  // @inject_tags: `rostype:"int8" rosname:"command"`
+  int32 command = 2;
+  // @inject_tags: `rostype:"float32" rosname:"volume"`
+  float volume = 3;
+  // @inject_tags: `rostype:"string" rosname:"arg"`
+  string arg = 4;
+  // @inject_tags: `rostype:"string" rosname:"arg2"`
+  string arg2 = 5;
+}
+

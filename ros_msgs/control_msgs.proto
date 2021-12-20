@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/control_msgs";
+package control_msgs;
+
+import "std_msgs.proto";
+import "trajectory_msgs.proto";
+import "google/protobuf/timestamp.proto";
+
+// @inject_field: msg.Package `ros:"control_msgs"`
+message GripperCommand {
+  // @inject_tags: `rostype:"float64" rosname:"position"`
+  double position = 1;
+  // @inject_tags: `rostype:"float64" rosname:"max_effort"`
+  double max_effort = 2;
+}
+
+// @inject_field: msg.Package `ros:"control_msgs"`
+message JointControllerState {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"float64" rosname:"set_point"`
+  double set_point = 2;
+  // @inject_tags: `rostype:"float64" rosname:"process_value"`
+  double process_value = 3;
+  // @inject_tags: `rostype:"float64" rosname:"process_value_dot"`
+  double process_value_dot = 4;
+  // @inject_tags: `rostype:"float64" rosname:"error"`
+  double error = 5;
+  // @inject_tags: `rostype:"float64" rosname:"time_step"`
+  double time_step = 6;
+  // @inject_tags: `rostype:"float64" rosname:"command"`
+  double command = 7;
+  // @inject_tags: `rostype:"float64" rosname:"p"`
+  double p = 8;
+  // @inject_tags: `rostype:"float64" rosname:"i"`
+  double i = 9;
+  // @inject_tags: `rostype:"float64" rosname:"d"`
+  double d = 10;
+  // @inject_tags: `rostype:"float64" rosname:"i_clamp"`
+  double i_clamp = 11;
+  // @inject_tags: `rostype:"bool" rosname:"antiwindup"`
+  bool antiwindup = 12;
+}
+
+// @inject_field: msg.Package `ros:"control_msgs"`
+message JointJog {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string[]" rosname:"joint_names"`
+  repeated string joint_names = 2;
+  // @inject_tags: `rostype:"float64[]" rosname:"displacements"`
+  repeated double displacements = 3;
+  // @inject_tags: `rostype:"float64[]" rosname:"velocities"`
+  repeated double velocities = 4;
+  // @inject_tags: `rostype:"float64" rosname:"duration"`
+  double duration = 5;
+}
+
+// @inject_field: msg.Package `ros:"control_msgs"`
+message JointTolerance {
+  // @inject_tags: `rostype:"string" rosname:"name"`
+  string name = 1;
+  // @inject_tags: `rostype:"float64" rosname:"position"`
+  double position = 2;
+  // @inject_tags: `rostype:"float64" rosname:"velocity"`
+  double velocity = 3;
+  // @inject_tags: `rostype:"float64" rosname:"acceleration"`
+  double acceleration = 4;
+}
+
+// @inject_field: msg.Package `ros:"control_msgs"`
+message JointTrajectoryControllerState {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string[]" rosname:"joint_names"`
+  repeated string joint_names = 2;
+  // @inject_tags: `rostype:"JointTrajectoryPoint" rosname:"desired"`
+  trajectory_msgs.JointTrajectoryPoint desired = 3;
+  // @inject_tags: `rostype:"JointTrajectoryPoint" rosname:"actual"`
+  trajectory_msgs.JointTrajectoryPoint actual = 4;
+  // @inject_tags: `rostype:"JointTrajectoryPoint" rosname:"error"`
+  trajectory_msgs.JointTrajectoryPoint error = 5;
+}
+
+// @inject_field: msg.Package `ros:"control_msgs"`
+message PidState {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"duration" rosname:"timestep"`
+  google.protobuf.Timestamp timestep = 2;
+  // @inject_tags: `rostype:"float64" rosname:"error"`
+  double error = 3;
+  // @inject_tags: `rostype:"float64" rosname:"error_dot"`
+  double error_dot = 4;
+  // @inject_tags: `rostype:"float64" rosname:"p_error"`
+  double p_error = 5;
+  // @inject_tags: `rostype:"float64" rosname:"i_error"`
+  double i_error = 6;
+  // @inject_tags: `rostype:"float64" rosname:"d_error"`
+  double d_error = 7;
+  // @inject_tags: `rostype:"float64" rosname:"p_term"`
+  double p_term = 8;
+  // @inject_tags: `rostype:"float64" rosname:"i_term"`
+  double i_term = 9;
+  // @inject_tags: `rostype:"float64" rosname:"d_term"`
+  double d_term = 10;
+  // @inject_tags: `rostype:"float64" rosname:"i_max"`
+  double i_max = 11;
+  // @inject_tags: `rostype:"float64" rosname:"i_min"`
+  double i_min = 12;
+  // @inject_tags: `rostype:"float64" rosname:"output"`
+  double output = 13;
+}
+

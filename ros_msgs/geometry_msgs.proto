@@ -1,0 +1,263 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/geometry_msgs";
+package geometry_msgs;
+
+import "std_msgs.proto";
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Accel {
+  // @inject_tags: `rostype:"Vector3" rosname:"linear"`
+  Vector3 linear = 1;
+  // @inject_tags: `rostype:"Vector3" rosname:"angular"`
+  Vector3 angular = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message AccelStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Accel" rosname:"accel"`
+  Accel accel = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message AccelWithCovariance {
+  // @inject_tags: `rostype:"Accel" rosname:"accel"`
+  Accel accel = 1;
+  // @inject_tags: `rostype:"float64[36]" rosname:"covariance"`
+  repeated double covariance = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message AccelWithCovarianceStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"AccelWithCovariance" rosname:"accel"`
+  AccelWithCovariance accel = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Inertia {
+  // @inject_tags: `rostype:"float64" rosname:"m"`
+  double m = 1;
+  // @inject_tags: `rostype:"Vector3" rosname:"com"`
+  Vector3 com = 2;
+  // @inject_tags: `rostype:"float64" rosname:"ixx"`
+  double ixx = 3;
+  // @inject_tags: `rostype:"float64" rosname:"ixy"`
+  double ixy = 4;
+  // @inject_tags: `rostype:"float64" rosname:"ixz"`
+  double ixz = 5;
+  // @inject_tags: `rostype:"float64" rosname:"iyy"`
+  double iyy = 6;
+  // @inject_tags: `rostype:"float64" rosname:"iyz"`
+  double iyz = 7;
+  // @inject_tags: `rostype:"float64" rosname:"izz"`
+  double izz = 8;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message InertiaStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Inertia" rosname:"inertia"`
+  Inertia inertia = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Point {
+  // @inject_tags: `rostype:"float64" rosname:"x"`
+  double x = 1;
+  // @inject_tags: `rostype:"float64" rosname:"y"`
+  double y = 2;
+  // @inject_tags: `rostype:"float64" rosname:"z"`
+  double z = 3;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Point32 {
+  // @inject_tags: `rostype:"float32" rosname:"x"`
+  float x = 1;
+  // @inject_tags: `rostype:"float32" rosname:"y"`
+  float y = 2;
+  // @inject_tags: `rostype:"float32" rosname:"z"`
+  float z = 3;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message PointStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Point" rosname:"point"`
+  Point point = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Polygon {
+  // @inject_tags: `rostype:"Point32[]" rosname:"points"`
+  repeated Point32 points = 1;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message PolygonStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Polygon" rosname:"polygon"`
+  Polygon polygon = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Pose {
+  // @inject_tags: `rostype:"Point" rosname:"position"`
+  Point position = 1;
+  // @inject_tags: `rostype:"Quaternion" rosname:"orientation"`
+  Quaternion orientation = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Pose2D {
+  // @inject_tags: `rostype:"float64" rosname:"x"`
+  double x = 1;
+  // @inject_tags: `rostype:"float64" rosname:"y"`
+  double y = 2;
+  // @inject_tags: `rostype:"float64" rosname:"theta"`
+  double theta = 3;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message PoseArray {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Pose[]" rosname:"poses"`
+  repeated Pose poses = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message PoseStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Pose" rosname:"pose"`
+  Pose pose = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message PoseWithCovariance {
+  // @inject_tags: `rostype:"Pose" rosname:"pose"`
+  Pose pose = 1;
+  // @inject_tags: `rostype:"float64[36]" rosname:"covariance"`
+  repeated double covariance = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message PoseWithCovarianceStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"PoseWithCovariance" rosname:"pose"`
+  PoseWithCovariance pose = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Quaternion {
+  // @inject_tags: `rostype:"float64" rosname:"x"`
+  double x = 1;
+  // @inject_tags: `rostype:"float64" rosname:"y"`
+  double y = 2;
+  // @inject_tags: `rostype:"float64" rosname:"z"`
+  double z = 3;
+  // @inject_tags: `rostype:"float64" rosname:"w"`
+  double w = 4;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message QuaternionStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Quaternion" rosname:"quaternion"`
+  Quaternion quaternion = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Transform {
+  // @inject_tags: `rostype:"Vector3" rosname:"translation"`
+  Vector3 translation = 1;
+  // @inject_tags: `rostype:"Quaternion" rosname:"rotation"`
+  Quaternion rotation = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message TransformStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string" rosname:"child_frame_id"`
+  string child_frame_id = 2;
+  // @inject_tags: `rostype:"Transform" rosname:"transform"`
+  Transform transform = 3;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Twist {
+  // @inject_tags: `rostype:"Vector3" rosname:"linear"`
+  Vector3 linear = 1;
+  // @inject_tags: `rostype:"Vector3" rosname:"angular"`
+  Vector3 angular = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message TwistStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Twist" rosname:"twist"`
+  Twist twist = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message TwistWithCovariance {
+  // @inject_tags: `rostype:"Twist" rosname:"twist"`
+  Twist twist = 1;
+  // @inject_tags: `rostype:"float64[36]" rosname:"covariance"`
+  repeated double covariance = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message TwistWithCovarianceStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"TwistWithCovariance" rosname:"twist"`
+  TwistWithCovariance twist = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Vector3 {
+  // @inject_tags: `rostype:"float64" rosname:"x"`
+  double x = 1;
+  // @inject_tags: `rostype:"float64" rosname:"y"`
+  double y = 2;
+  // @inject_tags: `rostype:"float64" rosname:"z"`
+  double z = 3;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Vector3Stamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Vector3" rosname:"vector"`
+  Vector3 vector = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message Wrench {
+  // @inject_tags: `rostype:"Vector3" rosname:"force"`
+  Vector3 force = 1;
+  // @inject_tags: `rostype:"Vector3" rosname:"torque"`
+  Vector3 torque = 2;
+}
+
+// @inject_field: msg.Package `ros:"geometry_msgs"`
+message WrenchStamped {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Wrench" rosname:"wrench"`
+  Wrench wrench = 2;
+}
+

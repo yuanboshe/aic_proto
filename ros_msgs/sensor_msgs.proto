@@ -1,0 +1,399 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/sensor_msgs";
+package sensor_msgs;
+
+import "google/protobuf/timestamp.proto";
+import "std_msgs.proto";
+import "geometry_msgs.proto";
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 POWER_SUPPLY_TECHNOLOGY_LIMN=6"`
+message BatteryState {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"float32" rosname:"voltage"`
+  float voltage = 2;
+  // @inject_tags: `rostype:"float32" rosname:"temperature"`
+  float temperature = 3;
+  // @inject_tags: `rostype:"float32" rosname:"current"`
+  float current = 4;
+  // @inject_tags: `rostype:"float32" rosname:"charge"`
+  float charge = 5;
+  // @inject_tags: `rostype:"float32" rosname:"capacity"`
+  float capacity = 6;
+  // @inject_tags: `rostype:"float32" rosname:"design_capacity"`
+  float design_capacity = 7;
+  // @inject_tags: `rostype:"float32" rosname:"percentage"`
+  float percentage = 8;
+  // @inject_tags: `rostype:"uint8" rosname:"power_supply_status"`
+  uint32 power_supply_status = 9;
+  // @inject_tags: `rostype:"uint8" rosname:"power_supply_health"`
+  uint32 power_supply_health = 10;
+  // @inject_tags: `rostype:"uint8" rosname:"power_supply_technology"`
+  uint32 power_supply_technology = 11;
+  // @inject_tags: `rostype:"bool" rosname:"present"`
+  bool present = 12;
+  // @inject_tags: `rostype:"float32[]" rosname:"cell_voltage"`
+  repeated float cell_voltage = 13;
+  // @inject_tags: `rostype:"float32[]" rosname:"cell_temperature"`
+  repeated float cell_temperature = 14;
+  // @inject_tags: `rostype:"string" rosname:"location"`
+  string location = 15;
+  // @inject_tags: `rostype:"string" rosname:"serial_number"`
+  string serial_number = 16;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message CameraInfo {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"uint32" rosname:"height"`
+  uint32 height = 2;
+  // @inject_tags: `rostype:"uint32" rosname:"width"`
+  uint32 width = 3;
+  // @inject_tags: `rostype:"string" rosname:"distortion_model"`
+  string distortion_model = 4;
+  // @inject_tags: `rostype:"float64[]" rosname:"D"`
+  repeated double D = 5;
+  // @inject_tags: `rostype:"float64[9]" rosname:"K"`
+  repeated double K = 6;
+  // @inject_tags: `rostype:"float64[9]" rosname:"R"`
+  repeated double R = 7;
+  // @inject_tags: `rostype:"float64[12]" rosname:"P"`
+  repeated double P = 8;
+  // @inject_tags: `rostype:"uint32" rosname:"binning_x"`
+  uint32 binning_x = 9;
+  // @inject_tags: `rostype:"uint32" rosname:"binning_y"`
+  uint32 binning_y = 10;
+  // @inject_tags: `rostype:"RegionOfInterest" rosname:"roi"`
+  RegionOfInterest roi = 11;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message ChannelFloat32 {
+  // @inject_tags: `rostype:"string" rosname:"name"`
+  string name = 1;
+  // @inject_tags: `rostype:"float32[]" rosname:"values"`
+  repeated float values = 2;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message CompressedImage {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string" rosname:"format"`
+  string format = 2;
+  // @inject_tags: `rostype:"uint8[]" rosname:"data"`
+  repeated uint32 data = 3;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message FluidPressure {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"float64" rosname:"fluid_pressure"`
+  double fluid_pressure = 2;
+  // @inject_tags: `rostype:"float64" rosname:"variance"`
+  double variance = 3;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message Illuminance {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"float64" rosname:"illuminance"`
+  double illuminance = 2;
+  // @inject_tags: `rostype:"float64" rosname:"variance"`
+  double variance = 3;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message Image {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"uint32" rosname:"height"`
+  uint32 height = 2;
+  // @inject_tags: `rostype:"uint32" rosname:"width"`
+  uint32 width = 3;
+  // @inject_tags: `rostype:"string" rosname:"encoding"`
+  string encoding = 4;
+  // @inject_tags: `rostype:"uint8" rosname:"is_bigendian"`
+  uint32 is_bigendian = 5;
+  // @inject_tags: `rostype:"uint32" rosname:"step"`
+  uint32 step = 6;
+  // @inject_tags: `rostype:"uint8[]" rosname:"data"`
+  repeated uint32 data = 7;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message Imu {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Quaternion" rosname:"orientation"`
+  geometry_msgs.Quaternion orientation = 2;
+  // @inject_tags: `rostype:"float64[9]" rosname:"orientation_covariance"`
+  repeated double orientation_covariance = 3;
+  // @inject_tags: `rostype:"Vector3" rosname:"angular_velocity"`
+  geometry_msgs.Vector3 angular_velocity = 4;
+  // @inject_tags: `rostype:"float64[9]" rosname:"angular_velocity_covariance"`
+  repeated double angular_velocity_covariance = 5;
+  // @inject_tags: `rostype:"Vector3" rosname:"linear_acceleration"`
+  geometry_msgs.Vector3 linear_acceleration = 6;
+  // @inject_tags: `rostype:"float64[9]" rosname:"linear_acceleration_covariance"`
+  repeated double linear_acceleration_covariance = 7;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message JointState {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string[]" rosname:"name"`
+  repeated string name = 2;
+  // @inject_tags: `rostype:"float64[]" rosname:"position"`
+  repeated double position = 3;
+  // @inject_tags: `rostype:"float64[]" rosname:"velocity"`
+  repeated double velocity = 4;
+  // @inject_tags: `rostype:"float64[]" rosname:"effort"`
+  repeated double effort = 5;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message Joy {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"float32[]" rosname:"axes"`
+  repeated float axes = 2;
+  // @inject_tags: `rostype:"int32[]" rosname:"buttons"`
+  repeated int32 buttons = 3;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 TYPE_BUZZER=2"`
+message JoyFeedback {
+  // @inject_tags: `rostype:"uint8" rosname:"type"`
+  uint32 type = 1;
+  // @inject_tags: `rostype:"uint8" rosname:"id"`
+  uint32 id = 2;
+  // @inject_tags: `rostype:"float32" rosname:"intensity"`
+  float intensity = 3;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message JoyFeedbackArray {
+  // @inject_tags: `rostype:"JoyFeedback[]" rosname:"array"`
+  repeated JoyFeedback array = 1;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message LaserEcho {
+  // @inject_tags: `rostype:"float32[]" rosname:"echoes"`
+  repeated float echoes = 1;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message LaserScan {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"float32" rosname:"angle_min"`
+  float angle_min = 2;
+  // @inject_tags: `rostype:"float32" rosname:"angle_max"`
+  float angle_max = 3;
+  // @inject_tags: `rostype:"float32" rosname:"angle_increment"`
+  float angle_increment = 4;
+  // @inject_tags: `rostype:"float32" rosname:"time_increment"`
+  float time_increment = 5;
+  // @inject_tags: `rostype:"float32" rosname:"scan_time"`
+  float scan_time = 6;
+  // @inject_tags: `rostype:"float32" rosname:"range_min"`
+  float range_min = 7;
+  // @inject_tags: `rostype:"float32" rosname:"range_max"`
+  float range_max = 8;
+  // @inject_tags: `rostype:"float32[]" rosname:"ranges"`
+  repeated float ranges = 9;
+  // @inject_tags: `rostype:"float32[]" rosname:"intensities"`
+  repeated float intensities = 10;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message MagneticField {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Vector3" rosname:"magnetic_field"`
+  geometry_msgs.Vector3 magnetic_field = 2;
+  // @inject_tags: `rostype:"float64[9]" rosname:"magnetic_field_covariance"`
+  repeated double magnetic_field_covariance = 3;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message MultiDOFJointState {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string[]" rosname:"joint_names"`
+  repeated string joint_names = 2;
+  // @inject_tags: `rostype:"Transform[]" rosname:"transforms"`
+  repeated geometry_msgs.Transform transforms = 3;
+  // @inject_tags: `rostype:"Twist[]" rosname:"twist"`
+  repeated geometry_msgs.Twist twist = 4;
+  // @inject_tags: `rostype:"Wrench[]" rosname:"wrench"`
+  repeated geometry_msgs.Wrench wrench = 5;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message MultiEchoLaserScan {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"float32" rosname:"angle_min"`
+  float angle_min = 2;
+  // @inject_tags: `rostype:"float32" rosname:"angle_max"`
+  float angle_max = 3;
+  // @inject_tags: `rostype:"float32" rosname:"angle_increment"`
+  float angle_increment = 4;
+  // @inject_tags: `rostype:"float32" rosname:"time_increment"`
+  float time_increment = 5;
+  // @inject_tags: `rostype:"float32" rosname:"scan_time"`
+  float scan_time = 6;
+  // @inject_tags: `rostype:"float32" rosname:"range_min"`
+  float range_min = 7;
+  // @inject_tags: `rostype:"float32" rosname:"range_max"`
+  float range_max = 8;
+  // @inject_tags: `rostype:"LaserEcho[]" rosname:"ranges"`
+  repeated LaserEcho ranges = 9;
+  // @inject_tags: `rostype:"LaserEcho[]" rosname:"intensities"`
+  repeated LaserEcho intensities = 10;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 COVARIANCE_TYPE_KNOWN=3"`
+message NavSatFix {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"NavSatStatus" rosname:"status"`
+  NavSatStatus status = 2;
+  // @inject_tags: `rostype:"float64" rosname:"latitude"`
+  double latitude = 3;
+  // @inject_tags: `rostype:"float64" rosname:"longitude"`
+  double longitude = 4;
+  // @inject_tags: `rostype:"float64" rosname:"altitude"`
+  double altitude = 5;
+  // @inject_tags: `rostype:"float64[9]" rosname:"position_covariance"`
+  repeated double position_covariance = 6;
+  // @inject_tags: `rostype:"uint8" rosname:"position_covariance_type"`
+  uint32 position_covariance_type = 7;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+// @inject_field: msg.Definitions `ros:"uint16 SERVICE_GALILEO=8"`
+message NavSatStatus {
+  // @inject_tags: `rostype:"int8" rosname:"status"`
+  int32 status = 1;
+  // @inject_tags: `rostype:"uint16" rosname:"service"`
+  uint32 service = 2;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message PointCloud {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Point32[]" rosname:"points"`
+  repeated geometry_msgs.Point32 points = 2;
+  // @inject_tags: `rostype:"ChannelFloat32[]" rosname:"channels"`
+  repeated ChannelFloat32 channels = 3;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message PointCloud2 {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"uint32" rosname:"height"`
+  uint32 height = 2;
+  // @inject_tags: `rostype:"uint32" rosname:"width"`
+  uint32 width = 3;
+  // @inject_tags: `rostype:"PointField[]" rosname:"fields"`
+  repeated PointField fields = 4;
+  // @inject_tags: `rostype:"bool" rosname:"is_bigendian"`
+  bool is_bigendian = 5;
+  // @inject_tags: `rostype:"uint32" rosname:"point_step"`
+  uint32 point_step = 6;
+  // @inject_tags: `rostype:"uint32" rosname:"row_step"`
+  uint32 row_step = 7;
+  // @inject_tags: `rostype:"uint8[]" rosname:"data"`
+  repeated uint32 data = 8;
+  // @inject_tags: `rostype:"bool" rosname:"is_dense"`
+  bool is_dense = 9;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 FLOAT64=8"`
+message PointField {
+  // @inject_tags: `rostype:"string" rosname:"name"`
+  string name = 1;
+  // @inject_tags: `rostype:"uint32" rosname:"offset"`
+  uint32 offset = 2;
+  // @inject_tags: `rostype:"uint8" rosname:"datatype"`
+  uint32 datatype = 3;
+  // @inject_tags: `rostype:"uint32" rosname:"count"`
+  uint32 count = 4;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 INFRARED=1"`
+message Range {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"uint8" rosname:"radiation_type"`
+  uint32 radiation_type = 2;
+  // @inject_tags: `rostype:"float32" rosname:"field_of_view"`
+  float field_of_view = 3;
+  // @inject_tags: `rostype:"float32" rosname:"min_range"`
+  float min_range = 4;
+  // @inject_tags: `rostype:"float32" rosname:"max_range"`
+  float max_range = 5;
+  // @inject_tags: `rostype:"float32" rosname:"range"`
+  float range = 6;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message RegionOfInterest {
+  // @inject_tags: `rostype:"uint32" rosname:"x_offset"`
+  uint32 x_offset = 1;
+  // @inject_tags: `rostype:"uint32" rosname:"y_offset"`
+  uint32 y_offset = 2;
+  // @inject_tags: `rostype:"uint32" rosname:"height"`
+  uint32 height = 3;
+  // @inject_tags: `rostype:"uint32" rosname:"width"`
+  uint32 width = 4;
+  // @inject_tags: `rostype:"bool" rosname:"do_rectify"`
+  bool do_rectify = 5;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message RelativeHumidity {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"float64" rosname:"relative_humidity"`
+  double relative_humidity = 2;
+  // @inject_tags: `rostype:"float64" rosname:"variance"`
+  double variance = 3;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message Temperature {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"float64" rosname:"temperature"`
+  double temperature = 2;
+  // @inject_tags: `rostype:"float64" rosname:"variance"`
+  double variance = 3;
+}
+
+// @inject_field: msg.Package `ros:"sensor_msgs"`
+message TimeReference {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"time" rosname:"time_ref"`
+  google.protobuf.Timestamp time_ref = 2;
+  // @inject_tags: `rostype:"string" rosname:"source"`
+  string source = 3;
+}
+

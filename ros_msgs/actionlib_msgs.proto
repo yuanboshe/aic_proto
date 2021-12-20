@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/actionlib_msgs";
+package actionlib_msgs;
+
+import "google/protobuf/timestamp.proto";
+import "std_msgs.proto";
+
+// @inject_field: msg.Package `ros:"actionlib_msgs"`
+message GoalID {
+  // @inject_tags: `rostype:"time" rosname:"stamp"`
+  google.protobuf.Timestamp stamp = 1;
+  // @inject_tags: `rostype:"string" rosname:"id"`
+  string id = 2;
+}
+
+// @inject_field: msg.Package `ros:"actionlib_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 LOST=9"`
+message GoalStatus {
+  // @inject_tags: `rostype:"GoalID" rosname:"goal_id"`
+  GoalID goal_id = 1;
+  // @inject_tags: `rostype:"uint8" rosname:"status"`
+  uint32 status = 2;
+  // @inject_tags: `rostype:"string" rosname:"text"`
+  string text = 3;
+}
+
+// @inject_field: msg.Package `ros:"actionlib_msgs"`
+message GoalStatusArray {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"GoalStatus[]" rosname:"status_list"`
+  repeated GoalStatus status_list = 2;
+}
+

@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/srv_robot";
+package srv_robot;
+
+import "msgs/common_msgs.proto";
+import "msgs/device_msgs.proto";
+import "msgs/task_msgs.proto";
+import "msgs/map_msgs.proto";
+
+import "geometry_msgs.proto";
+import "nav_msgs.proto";
+
+service SrvApi {
+  // 获取API版本
+  rpc GetVersion(Empty) returns (Version);
+
+  // 发布/订阅控制信息, topic "base_cmd_vel"
+  rpc PubTwist(stream geometry_msgs.Twist) returns (Empty);
+  rpc SubTwist(Empty) returns (stream geometry_msgs.Twist);
+
+  // 发布/订阅位姿信息, topic "odom"
+  rpc PubOdom(stream nav_msgs.Odometry) returns(Empty);
+  rpc SubOdom(Empty) returns (stream nav_msgs.Odometry);
+
+  // 查询机器人信息 robotInfoRequest
+  rpc SelectRobotInfo(msgs.RobotInfo) returns (msgs.RobotInfo);
+  // 修改机器人信息 setRobotInfoRequest calibrationRequest wheelConfigRequest
+  rpc UpdateRobotInfo(msgs.RobotInfo) returns (msgs.RobotInfo);
+  // 设置机器人坐标 setRobotPoseRequest
+  rpc SetRobotPose(msgs.Pose2D) returns (msgs.ErrCode);
+  // 设置机器人工作模式 setWorkModeRequest
+  rpc SetRobotMode(msgs.RobotInfo) returns (msgs.ErrCode);
+
+  // 查询当前子场景信息 mapListRequest mapDataRequest
+  rpc SelectSubScene(msgs.SubScene) returns (msgs.SubScene);
+  // 更新当前子场景 updateMapFileRequest uploadMapRequest modifyMapNameRequest
+  rpc UpdateSubScene(msgs.SubScene) returns (msgs.SubScene);
+  // 保存地图 saveBuildMapRequest
+  rpc SaveMap(msgs.SubScene) returns (msgs.SubScene);
+  // 切换地图 switchMapRequest
+  rpc ActiveSubScene(msgs.SubScene) returns (msgs.ErrCode);
+
+  // 查询现有任务列表
+  rpc SelectTaskList(msgs.TaskList) returns (msgs.TaskList);
+  // 新增任务列表 doTaskRequest
+  rpc InsertTaskList(msgs.TaskList) returns (msgs.TaskList);
+  // 修改任务列表+任务列表重新排序
+  rpc UpdateTaskList(msgs.TaskList) returns (msgs.TaskList);
+  // 删除任务列表
+  rpc DeleteTaskList(msgs.TaskList) returns (msgs.TaskList);
+
+  /// 手动模式
+  // 构图、清除障碍、语音 speakRequest buildMapRequest clearObstaclesRequest
+  rpc SendCmd(msgs.RobotCmd) returns (Empty);
+}
+
+message Empty {}
+message Version {string version = 1;}

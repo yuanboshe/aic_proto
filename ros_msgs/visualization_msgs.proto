@@ -1,0 +1,195 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/visualization_msgs";
+package visualization_msgs;
+
+import "geometry_msgs.proto";
+import "google/protobuf/timestamp.proto";
+import "std_msgs.proto";
+
+// @inject_field: msg.Package `ros:"visualization_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 REMOVE=1"`
+message ImageMarker {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string" rosname:"ns"`
+  string ns = 2;
+  // @inject_tags: `rostype:"int32" rosname:"id"`
+  int32 id = 3;
+  // @inject_tags: `rostype:"int32" rosname:"type"`
+  int32 type = 4;
+  // @inject_tags: `rostype:"int32" rosname:"action"`
+  int32 action = 5;
+  // @inject_tags: `rostype:"Point" rosname:"position"`
+  geometry_msgs.Point position = 6;
+  // @inject_tags: `rostype:"float32" rosname:"scale"`
+  float scale = 7;
+  // @inject_tags: `rostype:"ColorRGBA" rosname:"outline_color"`
+  std_msgs.ColorRGBA outline_color = 8;
+  // @inject_tags: `rostype:"uint8" rosname:"filled"`
+  uint32 filled = 9;
+  // @inject_tags: `rostype:"ColorRGBA" rosname:"fill_color"`
+  std_msgs.ColorRGBA fill_color = 10;
+  // @inject_tags: `rostype:"duration" rosname:"lifetime"`
+  google.protobuf.Timestamp lifetime = 11;
+  // @inject_tags: `rostype:"Point[]" rosname:"points"`
+  repeated geometry_msgs.Point points = 12;
+  // @inject_tags: `rostype:"ColorRGBA[]" rosname:"outline_colors"`
+  repeated std_msgs.ColorRGBA outline_colors = 13;
+}
+
+// @inject_field: msg.Package `ros:"visualization_msgs"`
+message InteractiveMarker {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Pose" rosname:"pose"`
+  geometry_msgs.Pose pose = 2;
+  // @inject_tags: `rostype:"string" rosname:"name"`
+  string name = 3;
+  // @inject_tags: `rostype:"string" rosname:"description"`
+  string description = 4;
+  // @inject_tags: `rostype:"float32" rosname:"scale"`
+  float scale = 5;
+  // @inject_tags: `rostype:"MenuEntry[]" rosname:"menu_entries"`
+  repeated MenuEntry menu_entries = 6;
+  // @inject_tags: `rostype:"InteractiveMarkerControl[]" rosname:"controls"`
+  repeated InteractiveMarkerControl controls = 7;
+}
+
+// @inject_field: msg.Package `ros:"visualization_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 MOVE_ROTATE_3D=9"`
+message InteractiveMarkerControl {
+  // @inject_tags: `rostype:"string" rosname:"name"`
+  string name = 1;
+  // @inject_tags: `rostype:"Quaternion" rosname:"orientation"`
+  geometry_msgs.Quaternion orientation = 2;
+  // @inject_tags: `rostype:"uint8" rosname:"orientation_mode"`
+  uint32 orientation_mode = 3;
+  // @inject_tags: `rostype:"uint8" rosname:"interaction_mode"`
+  uint32 interaction_mode = 4;
+  // @inject_tags: `rostype:"bool" rosname:"always_visible"`
+  bool always_visible = 5;
+  // @inject_tags: `rostype:"Marker[]" rosname:"markers"`
+  repeated Marker markers = 6;
+  // @inject_tags: `rostype:"bool" rosname:"independent_marker_orientation"`
+  bool independent_marker_orientation = 7;
+  // @inject_tags: `rostype:"string" rosname:"description"`
+  string description = 8;
+}
+
+// @inject_field: msg.Package `ros:"visualization_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 MOUSE_UP=5"`
+message InteractiveMarkerFeedback {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string" rosname:"client_id"`
+  string client_id = 2;
+  // @inject_tags: `rostype:"string" rosname:"marker_name"`
+  string marker_name = 3;
+  // @inject_tags: `rostype:"string" rosname:"control_name"`
+  string control_name = 4;
+  // @inject_tags: `rostype:"uint8" rosname:"event_type"`
+  uint32 event_type = 5;
+  // @inject_tags: `rostype:"Pose" rosname:"pose"`
+  geometry_msgs.Pose pose = 6;
+  // @inject_tags: `rostype:"uint32" rosname:"menu_entry_id"`
+  uint32 menu_entry_id = 7;
+  // @inject_tags: `rostype:"Point" rosname:"mouse_point"`
+  geometry_msgs.Point mouse_point = 8;
+  // @inject_tags: `rostype:"bool" rosname:"mouse_point_valid"`
+  bool mouse_point_valid = 9;
+}
+
+// @inject_field: msg.Package `ros:"visualization_msgs"`
+message InteractiveMarkerInit {
+  // @inject_tags: `rostype:"string" rosname:"server_id"`
+  string server_id = 1;
+  // @inject_tags: `rostype:"uint64" rosname:"seq_num"`
+  uint64 seq_num = 2;
+  // @inject_tags: `rostype:"InteractiveMarker[]" rosname:"markers"`
+  repeated InteractiveMarker markers = 3;
+}
+
+// @inject_field: msg.Package `ros:"visualization_msgs"`
+message InteractiveMarkerPose {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Pose" rosname:"pose"`
+  geometry_msgs.Pose pose = 2;
+  // @inject_tags: `rostype:"string" rosname:"name"`
+  string name = 3;
+}
+
+// @inject_field: msg.Package `ros:"visualization_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 UPDATE=1"`
+message InteractiveMarkerUpdate {
+  // @inject_tags: `rostype:"string" rosname:"server_id"`
+  string server_id = 1;
+  // @inject_tags: `rostype:"uint64" rosname:"seq_num"`
+  uint64 seq_num = 2;
+  // @inject_tags: `rostype:"uint8" rosname:"type"`
+  uint32 type = 3;
+  // @inject_tags: `rostype:"InteractiveMarker[]" rosname:"markers"`
+  repeated InteractiveMarker markers = 4;
+  // @inject_tags: `rostype:"InteractiveMarkerPose[]" rosname:"poses"`
+  repeated InteractiveMarkerPose poses = 5;
+  // @inject_tags: `rostype:"string[]" rosname:"erases"`
+  repeated string erases = 6;
+}
+
+// @inject_field: msg.Package `ros:"visualization_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 DELETEALL=3"`
+message Marker {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string" rosname:"ns"`
+  string ns = 2;
+  // @inject_tags: `rostype:"int32" rosname:"id"`
+  int32 id = 3;
+  // @inject_tags: `rostype:"int32" rosname:"type"`
+  int32 type = 4;
+  // @inject_tags: `rostype:"int32" rosname:"action"`
+  int32 action = 5;
+  // @inject_tags: `rostype:"Pose" rosname:"pose"`
+  geometry_msgs.Pose pose = 6;
+  // @inject_tags: `rostype:"Vector3" rosname:"scale"`
+  geometry_msgs.Vector3 scale = 7;
+  // @inject_tags: `rostype:"ColorRGBA" rosname:"color"`
+  std_msgs.ColorRGBA color = 8;
+  // @inject_tags: `rostype:"duration" rosname:"lifetime"`
+  google.protobuf.Timestamp lifetime = 9;
+  // @inject_tags: `rostype:"bool" rosname:"frame_locked"`
+  bool frame_locked = 10;
+  // @inject_tags: `rostype:"Point[]" rosname:"points"`
+  repeated geometry_msgs.Point points = 11;
+  // @inject_tags: `rostype:"ColorRGBA[]" rosname:"colors"`
+  repeated std_msgs.ColorRGBA colors = 12;
+  // @inject_tags: `rostype:"string" rosname:"text"`
+  string text = 13;
+  // @inject_tags: `rostype:"string" rosname:"mesh_resource"`
+  string mesh_resource = 14;
+  // @inject_tags: `rostype:"bool" rosname:"mesh_use_embedded_materials"`
+  bool mesh_use_embedded_materials = 15;
+}
+
+// @inject_field: msg.Package `ros:"visualization_msgs"`
+message MarkerArray {
+  // @inject_tags: `rostype:"Marker[]" rosname:"markers"`
+  repeated Marker markers = 1;
+}
+
+// @inject_field: msg.Package `ros:"visualization_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 ROSLAUNCH=2"`
+message MenuEntry {
+  // @inject_tags: `rostype:"uint32" rosname:"id"`
+  uint32 id = 1;
+  // @inject_tags: `rostype:"uint32" rosname:"parent_id"`
+  uint32 parent_id = 2;
+  // @inject_tags: `rostype:"string" rosname:"title"`
+  string title = 3;
+  // @inject_tags: `rostype:"string" rosname:"command"`
+  string command = 4;
+  // @inject_tags: `rostype:"uint8" rosname:"command_type"`
+  uint32 command_type = 5;
+}
+

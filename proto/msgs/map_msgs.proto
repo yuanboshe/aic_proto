@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/msgs";
+package msgs;
+
+import "google/protobuf/timestamp.proto";
+import "msgs/common_msgs.proto";
+
+// 点标记
+message PointMarker {
+  optional uint32 id = 1 [
+    (column) = "id",
+    (data_type) = "unsigned"
+  ]; //自动生成
+  optional uint32 sub_scene_id = 2 [
+    (column) = "sub_scene_id",
+    (data_type) = "unsigned"
+  ]; //外键，子场景id
+  optional uint32 device_id = 3 [
+    (column) = "device_id",
+    (data_type) = "unsigned"
+  ]; //外键，如果type是RBOX、CHARGER、UWB之类设备，则设置其id
+  google.protobuf.Timestamp update = 4; //更新时间
+  Type type = 5
+      [ (column) = "type", (data_type) = "int" ];
+  Pose2D pose = 6 [
+    (column) = "pose",
+    (data_type) = "varchar_long"
+  ]; //标志的位姿
+  optional float height = 7 [
+    (column) = "height",
+    (data_type) = "float"
+  ]; //标志的高度
+  // TODO: 按类别oneof
+  optional float length = 8;  //显示矩形长，仅显示作用，默认0
+  optional float width = 9;   //显示矩形宽，仅显示作用，默认0
+  optional float radius = 10; //显示圆半径，仅显示作用，默认0
+
+  enum Type {
+    UNKNOWN = 0;
+    COMMON = 1; //通用、引导点、储位、停车位、辊筒桩、虫洞、电梯、货架、复位点
+    RBOX = 2;   //远程控制盒
+    CHARGER = 3;   //充电桩
+    UWB = 4;       // UWB基站
+    FBOARD = 5;    //特征板
+    MAGNETISM = 6; //磁条引导
+  }
+}
+message PointMarkerList {
+  repeated PointMarker point_markers = 1
+      [ (table_name) = "PointMarker" ]; //点标记列表
+}
+
+// 区域标记（通过连续的边界点闭合得到）
+message AreaMarker {
+  optional uint32 id = 1 [
+    (column) = "id",
+    (data_type) = "unsigned"
+  ]; //自动生成
+  optional uint32 sub_scene_id = 2 [
+    (column) = "sub_scene_id",
+    (data_type) = "unsigned"
+  ];                                    //外键，子场景id
+  google.protobuf.Timestamp update = 3; //更新时间
+  Type type = 4 [
+    (column) = "type",
+    (data_type) = "int"
+  ]; // Marker类型
+  repeated Point2D points = 5 [
+    (column) = "points",
+    (data_type) = "varchar_long"
+  ]; //边界点
+  repeated Pose2D trajectory = 6 [
+    (column) = "trajectory",
+    (data_type) = "varchar_long"
+  ]; //停靠时的位姿
+
+  enum Type {
+    UNKNOWN = 0;
+    COMMON = 1;     //通用
+    FORBIDDEN = 2;  //禁区
+    RESTRICTED = 3; //限速区
+  }
+}
+message AreaMarkerList {
+  repeated AreaMarker area_markers = 1
+      [ (table_name) = "AreaMarker" ]; //区域标记列表
+}
+
+// 子场景信息
+message SubScene {
+  optional uint32 id = 1 [
+    (column) = "id",
+    (data_type) = "unsigned"
+  ]; //自动生成
+  optional uint32 scene_id = 2 [
+    (column) = "scene_id",
+    (data_type) = "unsigned"
+  ]; //外键，场景id
+  optional string name = 3
+      [ (column) = "name", (data_type) = "char[47]" ];
+  google.protobuf.Timestamp update = 4; //更新时间
+  repeated PointMarker point_markers = 5 [
+    (table_name) = "PointMarker",
+    (fkey_name) = "sub_scene_id"
+  ];
+  repeated AreaMarker area_markers = 6 [
+    (table_name) = "AreaMarker",
+    (fkey_name) = "sub_scene_id"
+  ];
+  optional string map_url = 7 [
+    (column) = "map_url",
+    (data_type) = "char[128]"
+  ]; //地图文件资源地址
+  optional string thumb_map_url = 8 [
+    (column) = "thumb_map_url",
+    (data_type) = "char[128]"
+  ]; //地图缩略图资源地址
+}
+message SubSceneList {
+  repeated SubScene sub_scenes = 1
+      [ (table_name) = "SubScene" ]; //子场景列表
+}
+
+// 场景信息
+message Scene {
+  optional uint32 id = 1 [
+    (column) = "id",
+    (data_type) = "unsigned"
+  ]; //自动生成
+  optional string name = 2
+      [ (column) = "name", (data_type) = "char[47]" ];
+  google.protobuf.Timestamp update = 3; //更新时间
+  repeated SubScene sub_scenes = 4 [
+    (table_name) = "SubScene",
+    (fkey_name) = "scene_id"
+  ];
+}
+message SceneList {
+  repeated Scene scenes = 1 [ (table_name) = "Scene" ]; //场景列表
+}

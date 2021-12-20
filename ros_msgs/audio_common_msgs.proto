@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/audio_common_msgs";
+package audio_common_msgs;
+
+// @inject_field: msg.Package `ros:"audio_common_msgs"`
+message AudioData {
+  // @inject_tags: `rostype:"uint8[]" rosname:"data"`
+  repeated uint32 data = 1;
+}
+
+// @inject_field: msg.Package `ros:"audio_common_msgs"`
+message AudioInfo {
+  // @inject_tags: `rostype:"uint8" rosname:"channels"`
+  uint32 channels = 1;
+  // @inject_tags: `rostype:"uint32" rosname:"sample_rate"`
+  uint32 sample_rate = 2;
+  // @inject_tags: `rostype:"string" rosname:"sample_format"`
+  string sample_format = 3;
+  // @inject_tags: `rostype:"uint32" rosname:"bitrate"`
+  uint32 bitrate = 4;
+  // @inject_tags: `rostype:"string" rosname:"coding_format"`
+  string coding_format = 5;
+}
+

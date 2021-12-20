@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/tf2_msgs";
+package tf2_msgs;
+
+import "geometry_msgs.proto";
+
+// @inject_field: msg.Package `ros:"tf2_msgs"`
+// @inject_field: msg.Definitions `ros:"uint8 TRANSFORM_ERROR=6"`
+message TF2Error {
+  // @inject_tags: `rostype:"uint8" rosname:"error"`
+  uint32 error = 1;
+  // @inject_tags: `rostype:"string" rosname:"error_string"`
+  string error_string = 2;
+}
+
+// @inject_field: msg.Package `ros:"tf2_msgs"`
+message TFMessage {
+  // @inject_tags: `rostype:"TransformStamped[]" rosname:"transforms"`
+  repeated geometry_msgs.TransformStamped transforms = 1;
+}
+

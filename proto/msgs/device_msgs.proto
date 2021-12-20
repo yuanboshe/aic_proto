@@ -1,0 +1,242 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/msgs";
+package msgs;
+
+import "msgs/common_msgs.proto";
+
+// DMS信息
+message DmsInfo {
+  uint32 id = 1; //自动生成（默认系统只有1台DMS，如果设置主从，则可以有多台DMS）
+  uint32 priority = 2; //自从运行优先级（从1开始，数字越小优先级越高）
+  // TODO: 完善DMS信息字段
+  repeated string log_infos = 3; // DMS运行日志信息列表
+}
+
+// 机器人信息
+message RobotInfo {
+  optional uint32 id = 1 [
+    (column) = "id",
+    (data_type) = "unsigned"
+  ]; //自动生成
+  optional uint32 sub_scene_id = 2 [
+    (column) = "sub_scene_id",
+    (data_type) = "unsigned"
+  ]; //外键，机器人在哪个子场景中运行
+  optional string name = 3
+      [ (column) = "name", (data_type) = "char[47]" ];
+  optional string model = 4 [
+    (column) = "model",
+    (data_type) = "char[47]"
+  ]; //机器人型号（下位机）
+  optional string lower_soft_version = 5 [
+    (column) = "lower_soft_version",
+    (data_type) = "char[47]"
+  ]; //下位机软件版本<0.1.0>
+  optional string lower_hard_version = 6 [
+    (column) = "lower_hard_version",
+    (data_type) = "char[47]"
+  ]; //下位机硬件版本<RAP V1.0.0_R>
+  optional string upper_soft_version = 7 [
+    (column) = "upper_soft_version",
+    (data_type) = "char[47]"
+  ]; //系统版本号（上位机软件版本）<0.1.0>
+  optional string api_version = 8 [
+    (column) = "api_version",
+    (data_type) = "char[47]"
+  ]; // API版本号<0.1.0>
+  optional string ip = 9 [
+    (column) = "ip",
+    (data_type) = "char[47]"
+  ]; // IP地址
+  optional uint32 battery = 10 [
+    (column) = "battery",
+    (data_type) = "unsigned"
+  ]; //电量，0~100
+  Status status = 11 [
+    (column) = "status",
+    (data_type) = "int"
+  ]; //机器人状态
+  Mode mode = 12 [
+    (column) = "mode",
+    (data_type) = "int"
+  ]; //机器人运行模式
+  Pose2D pose = 13 [
+    (column) = "pose",
+    (data_type) = "varchar_long"
+  ];                                   //机器人在子场景中的位姿
+  repeated string log_infos = 14;      //机器人运行日志信息列表
+  optional float wheel_distance = 15;  // 轮间距, 单位为米
+  optional float wheel_perimeter = 16; // 轮周长, 单位为米
+
+  enum Status {
+    UNKNOWN = 0;       //未知
+    ONTASK = 1;        //任务中
+    INIT = 2;          //初始化
+    FOLLOW = 3;        //跟随中
+    IDLE = 4;          //空闲
+    PAUSE_TASK = 5;    //任务暂停
+    PAUSE_DMS = 6;     //交管暂停
+    TELEOPERATION = 7; //遥控中：
+    WARNING = 8;       //警告
+    OFFLINE = 9;       //离线
+    ERROR = 10;        //故障
+    CHARGING = 11;     //充电中
+  }
+
+  enum Mode {
+    MODE_UNKNOWN = 0;     //未知
+    MODE_AUTO = 1;        //自动模式
+    MODE_MANUAL = 2;      //手动模式
+    MODE_MAINTENANCE = 3; //维护模式
+  }
+}
+// 数据库映射message。必须命名为table和db_operate，其他message类同。
+message RobotInfoList {
+  repeated RobotInfo robot_infos = 1 [ (table_name) = "RobotInfo" ];
+}
+
+// 机器人控制指令
+message RobotCmd {
+  oneof cmd {
+    bool build_map = 1;         //构建地图
+    bool follow = 7;            //自动跟随？并入任务？
+    bool clear_obstacle = 2;    //清空障碍
+    string speech = 3;          //语音
+    Twist twist = 4; //速度控制
+    bool stop = 5;              //停止运行
+    TaskCmd task_cmd = 6;       //任务模式下的指令
+  }
+
+  // 动作指令
+  enum TaskCmd {
+    kActionNone = 0;  // 不处理
+    kStart = 1;       // 开始
+    kPause = 2;       // 暂停
+    kContinue = 3;    // 继续
+    kCancel = 4;      // 取消
+    kRecover = 5;     // 恢复
+    kWaitBreak = 6;   // 等待打断
+    kTraffiCtrl = 7;  // 交通管制
+    kReleaseCtrl = 8; // 解除管制
+  }
+}
+
+// UWB信息
+message UwbInfo {
+  optional uint32 id = 1 [
+    (column) = "id",
+    (data_type) = "unsigned"
+  ]; //自动生成
+  optional string name = 2 [
+    (column) = "name",
+    (data_type) = "char[47]"
+  ]; //名字
+  optional string soft_version = 3 [
+    (column) = "soft_version",
+    (data_type) = "char[47]"
+  ]; //软件版本号
+  optional string hard_version = 4 [
+    (column) = "hard_version",
+    (data_type) = "char[47]"
+  ]; //硬件版本号
+  optional uint32 battery = 5 [
+    (column) = "battery",
+    (data_type) = "unsigned"
+  ]; //电量，0~100
+  Status status = 6 [
+    (column) = "status",
+    (data_type) = "int"
+  ]; // UWB状态
+
+  enum Status {
+    UNKNOWN = 0; //未知
+    NORMAL = 1;  //正常
+    OFFLINE = 2; //离线
+    ERROR = 3;   //故障
+  }
+}
+message UwbInfoList {
+  repeated UwbInfo uwb_infos = 1 [ (table_name) = "UwbInfo" ];
+}
+
+// 远程控制盒信息
+message RBoxInfo {
+  optional uint32 id = 1 [
+    (column) = "id",
+    (data_type) = "unsigned"
+  ]; //自动生成
+  optional string name = 2 [
+    (column) = "name",
+    (data_type) = "char[47]"
+  ]; //名字
+  optional string soft_version = 3 [
+    (column) = "soft_version",
+    (data_type) = "char[47]"
+  ]; //软件版本号
+  optional string hard_version = 4 [
+    (column) = "hard_version",
+    (data_type) = "char[47]"
+  ]; //硬件版本号
+  optional string mac = 5 [
+    (column) = "mac",
+    (data_type) = "char[47]"
+  ]; // MAC地址
+  optional string ip = 6 [
+    (column) = "ip",
+    (data_type) = "char[47]"
+  ]; // IP地址（动态）
+  optional uint32 battery = 7 [
+    (column) = "battery",
+    (data_type) = "unsigned"
+  ]; //电量，0~100
+  Status status = 8 [
+    (column) = "status",
+    (data_type) = "int"
+  ]; //远程控制盒状态
+
+  enum Status {
+    UNKNOWN = 0; //未知
+    NORMAL = 1;  //正常
+    OFFLINE = 2; //离线
+    ERROR = 3;   //故障
+  }
+}
+message RBoxInfoList {
+  repeated RBoxInfo rbox_infos = 1 [ (table_name) = "RBoxInfo" ];
+}
+
+// 充电桩信息
+message ChargerInfo {
+  optional uint32 id = 1 [
+    (column) = "id",
+    (data_type) = "unsigned"
+  ]; //自动生成
+  optional string name = 2 [
+    (column) = "name",
+    (data_type) = "char[47]"
+  ]; //名字
+  optional string soft_version = 3 [
+    (column) = "soft_version",
+    (data_type) = "char[47]"
+  ]; //软件版本号
+  optional string hard_version = 4 [
+    (column) = "hard_version",
+    (data_type) = "char[47]"
+  ]; //硬件版本号
+  Status status = 5 [
+    (column) = "status",
+    (data_type) = "int"
+  ]; //充电桩状态
+
+  enum Status {
+    UNKNOWN = 0;  //未知
+    NORMAL = 1;   //正常
+    ERROR = 2;    //故障
+    CHARGING = 3; //充电中
+  }
+}
+message ChargerInfoList {
+  repeated ChargerInfo charger_infos = 1
+      [ (table_name) = "ChargerInfo" ];
+}

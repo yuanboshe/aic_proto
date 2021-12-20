@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/tf";
+package tf;
+
+import "geometry_msgs.proto";
+
+// @inject_field: msg.Package `ros:"tf"`
+message tfMessage {
+  // @inject_tags: `rostype:"TransformStamped[]" rosname:"transforms"`
+  repeated geometry_msgs.TransformStamped transforms = 1;
+}
+

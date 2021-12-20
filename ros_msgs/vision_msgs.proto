@@ -1,0 +1,133 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/vision_msgs";
+package vision_msgs;
+
+import "geometry_msgs.proto";
+import "std_msgs.proto";
+import "sensor_msgs.proto";
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message BoundingBox2D {
+  // @inject_tags: `rostype:"Pose2D" rosname:"center"`
+  geometry_msgs.Pose2D center = 1;
+  // @inject_tags: `rostype:"float64" rosname:"size_x"`
+  double size_x = 2;
+  // @inject_tags: `rostype:"float64" rosname:"size_y"`
+  double size_y = 3;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message BoundingBox2DArray {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"BoundingBox2D[]" rosname:"boxes"`
+  repeated BoundingBox2D boxes = 2;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message BoundingBox3D {
+  // @inject_tags: `rostype:"Pose" rosname:"center"`
+  geometry_msgs.Pose center = 1;
+  // @inject_tags: `rostype:"Vector3" rosname:"size"`
+  geometry_msgs.Vector3 size = 2;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message BoundingBox3DArray {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"BoundingBox3D[]" rosname:"boxes"`
+  repeated BoundingBox3D boxes = 2;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message Classification2D {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"ObjectHypothesis[]" rosname:"results"`
+  repeated ObjectHypothesis results = 2;
+  // @inject_tags: `rostype:"Image" rosname:"source_img"`
+  sensor_msgs.Image source_img = 3;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message Classification3D {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"ObjectHypothesis[]" rosname:"results"`
+  repeated ObjectHypothesis results = 2;
+  // @inject_tags: `rostype:"PointCloud2" rosname:"source_cloud"`
+  sensor_msgs.PointCloud2 source_cloud = 3;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message Detection2D {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"ObjectHypothesisWithPose[]" rosname:"results"`
+  repeated ObjectHypothesisWithPose results = 2;
+  // @inject_tags: `rostype:"BoundingBox2D" rosname:"bbox"`
+  BoundingBox2D bbox = 3;
+  // @inject_tags: `rostype:"Image" rosname:"source_img"`
+  sensor_msgs.Image source_img = 4;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message Detection2DArray {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Detection2D[]" rosname:"detections"`
+  repeated Detection2D detections = 2;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message Detection3D {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"ObjectHypothesisWithPose[]" rosname:"results"`
+  repeated ObjectHypothesisWithPose results = 2;
+  // @inject_tags: `rostype:"BoundingBox3D" rosname:"bbox"`
+  BoundingBox3D bbox = 3;
+  // @inject_tags: `rostype:"PointCloud2" rosname:"source_cloud"`
+  sensor_msgs.PointCloud2 source_cloud = 4;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message Detection3DArray {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"Detection3D[]" rosname:"detections"`
+  repeated Detection3D detections = 2;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message ObjectHypothesis {
+  // @inject_tags: `rostype:"int64" rosname:"id"`
+  int64 id = 1;
+  // @inject_tags: `rostype:"float64" rosname:"score"`
+  double score = 2;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message ObjectHypothesisWithPose {
+  // @inject_tags: `rostype:"int64" rosname:"id"`
+  int64 id = 1;
+  // @inject_tags: `rostype:"float64" rosname:"score"`
+  double score = 2;
+  // @inject_tags: `rostype:"PoseWithCovariance" rosname:"pose"`
+  geometry_msgs.PoseWithCovariance pose = 3;
+}
+
+// @inject_field: msg.Package `ros:"vision_msgs"`
+message VisionInfo {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"string" rosname:"method"`
+  string method = 2;
+  // @inject_tags: `rostype:"string" rosname:"database_location"`
+  string database_location = 3;
+  // @inject_tags: `rostype:"int32" rosname:"database_version"`
+  int32 database_version = 4;
+}
+

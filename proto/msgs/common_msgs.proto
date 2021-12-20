@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/msgs";
+package msgs;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/descriptor.proto";
+
+// 扩展字段属性
+extend google.protobuf.FieldOptions {
+  string column = 50001;     // 50001 字段映射到数据库的列名
+  string data_type = 50002;  // 50002 字段的数据类型
+  string table_name = 50003; // 50003 repeated的table映射到数据库表名
+  string fkey_name = 50004;  // 50004 表格内外键字段名字
+}
+
+// Hello 测试用
+message Hello {
+  string request = 1;  //请求
+  string response = 2; //反馈
+}
+
+// 返回信息
+message ErrCode {
+  int32 code = 1;
+  string msg = 2;
+}
+
+// 日志 TODO: 待日志系统建设后完善
+message LogInfo {
+  uint32 id = 1;                        //自动生成
+  google.protobuf.Timestamp update = 2; //记录时间
+  enum Type {
+    UNKNOWN = 0;  //未知
+    FATAL = 1;    //崩溃，系统会被动停止工作
+    CRITICAL = 2; //严重错误，系统主动停止工作
+    ERROR = 3; //一般错误，系统继续工作，但必须处理，否则演变为严重错误
+    NOTICE = 4; //严重警告，需要解决，否则在不确定的时机会转变为错误
+    WARNING = 5; //一般警告，可以不用解决，但需要优化
+    INFO = 6;    //提醒用户注意的信息（非警告）
+    DEBUG = 7;   //调试信息
+    TRACE = 8;   //程序运行轨迹记录
+    RECORED = 9; //用户行为记录
+  }
+  Type type = 3;      //日志记录类型
+  string content = 4; //日志内容
+}
+message LogInfoList { repeated LogInfo log_infos = 1; }
+
+// 2D位姿
+message Pose2D {
+  float x = 1;     // 目标点x
+  float y = 2;     // 目标点y
+  float theta = 3; // 目标点朝向
+}
+
+// 2D点坐标
+message Point2D {
+  float x = 1; // x
+  float y = 2; // y
+}
+
+// 点坐标
+message Point {
+  float x = 1; // x
+  float y = 2; // y
+  float z = 3; // z
+}
+
+// 四元数
+message Quaternion {
+  float x = 1; // x
+  float y = 2; // y
+  float z = 3; // z
+  float w = 4; // w
+}
+
+// 3D位姿
+message Pose {
+  Point position = 1;         //坐标
+  Quaternion orientation = 2; //朝向
+}
+
+// 速度
+message Twist {
+  float linear = 1;  // 线速度
+  float angular = 2; // 角速度
+}
+
+// 属性
+message Property {
+  string key = 1;
+  string value = 2;
+  Type type = 3;
+
+  enum Type {
+    UNKNOWN = 0;
+    STRING = 1;
+    INT = 2;
+    FLOAT = 3;
+  }
+}

@@ -1,0 +1,235 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/std_msgs";
+package std_msgs;
+
+import "google/protobuf/timestamp.proto";
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Bool {
+  // @inject_tags: `rostype:"bool" rosname:"data"`
+  bool data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Byte {
+  // @inject_tags: `rostype:"byte" rosname:"data"`
+  int32 data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message ByteMultiArray {
+  // @inject_tags: `rostype:"MultiArrayLayout" rosname:"layout"`
+  MultiArrayLayout layout = 1;
+  // @inject_tags: `rostype:"byte[]" rosname:"data"`
+  repeated int32 data = 2;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Char {
+  // @inject_tags: `rostype:"char" rosname:"data"`
+  uint32 data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message ColorRGBA {
+  // @inject_tags: `rostype:"float32" rosname:"r"`
+  float r = 1;
+  // @inject_tags: `rostype:"float32" rosname:"g"`
+  float g = 2;
+  // @inject_tags: `rostype:"float32" rosname:"b"`
+  float b = 3;
+  // @inject_tags: `rostype:"float32" rosname:"a"`
+  float a = 4;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Duration {
+  // @inject_tags: `rostype:"duration" rosname:"data"`
+  google.protobuf.Timestamp data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Empty {
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Float32 {
+  // @inject_tags: `rostype:"float32" rosname:"data"`
+  float data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Float32MultiArray {
+  // @inject_tags: `rostype:"MultiArrayLayout" rosname:"layout"`
+  MultiArrayLayout layout = 1;
+  // @inject_tags: `rostype:"float32[]" rosname:"data"`
+  repeated float data = 2;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Float64 {
+  // @inject_tags: `rostype:"float64" rosname:"data"`
+  double data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Float64MultiArray {
+  // @inject_tags: `rostype:"MultiArrayLayout" rosname:"layout"`
+  MultiArrayLayout layout = 1;
+  // @inject_tags: `rostype:"float64[]" rosname:"data"`
+  repeated double data = 2;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Header {
+  // @inject_tags: `rostype:"uint32" rosname:"seq"`
+  uint32 seq = 1;
+  // @inject_tags: `rostype:"time" rosname:"stamp"`
+  google.protobuf.Timestamp stamp = 2;
+  // @inject_tags: `rostype:"string" rosname:"frame_id"`
+  string frame_id = 3;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Int16 {
+  // @inject_tags: `rostype:"int16" rosname:"data"`
+  int32 data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Int16MultiArray {
+  // @inject_tags: `rostype:"MultiArrayLayout" rosname:"layout"`
+  MultiArrayLayout layout = 1;
+  // @inject_tags: `rostype:"int16[]" rosname:"data"`
+  repeated int32 data = 2;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Int32 {
+  // @inject_tags: `rostype:"int32" rosname:"data"`
+  int32 data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Int32MultiArray {
+  // @inject_tags: `rostype:"MultiArrayLayout" rosname:"layout"`
+  MultiArrayLayout layout = 1;
+  // @inject_tags: `rostype:"int32[]" rosname:"data"`
+  repeated int32 data = 2;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Int64 {
+  // @inject_tags: `rostype:"int64" rosname:"data"`
+  int64 data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Int64MultiArray {
+  // @inject_tags: `rostype:"MultiArrayLayout" rosname:"layout"`
+  MultiArrayLayout layout = 1;
+  // @inject_tags: `rostype:"int64[]" rosname:"data"`
+  repeated int64 data = 2;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Int8 {
+  // @inject_tags: `rostype:"int8" rosname:"data"`
+  int32 data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Int8MultiArray {
+  // @inject_tags: `rostype:"MultiArrayLayout" rosname:"layout"`
+  MultiArrayLayout layout = 1;
+  // @inject_tags: `rostype:"int8[]" rosname:"data"`
+  repeated int32 data = 2;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message MultiArrayDimension {
+  // @inject_tags: `rostype:"string" rosname:"label"`
+  string label = 1;
+  // @inject_tags: `rostype:"uint32" rosname:"size"`
+  uint32 size = 2;
+  // @inject_tags: `rostype:"uint32" rosname:"stride"`
+  uint32 stride = 3;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message MultiArrayLayout {
+  // @inject_tags: `rostype:"MultiArrayDimension[]" rosname:"dim"`
+  repeated MultiArrayDimension dim = 1;
+  // @inject_tags: `rostype:"uint32" rosname:"data_offset"`
+  uint32 data_offset = 2;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message String {
+  // @inject_tags: `rostype:"string" rosname:"data"`
+  string data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message Time {
+  // @inject_tags: `rostype:"time" rosname:"data"`
+  google.protobuf.Timestamp data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message UInt16 {
+  // @inject_tags: `rostype:"uint16" rosname:"data"`
+  uint32 data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message UInt16MultiArray {
+  // @inject_tags: `rostype:"MultiArrayLayout" rosname:"layout"`
+  MultiArrayLayout layout = 1;
+  // @inject_tags: `rostype:"uint16[]" rosname:"data"`
+  repeated uint32 data = 2;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message UInt32 {
+  // @inject_tags: `rostype:"uint32" rosname:"data"`
+  uint32 data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message UInt32MultiArray {
+  // @inject_tags: `rostype:"MultiArrayLayout" rosname:"layout"`
+  MultiArrayLayout layout = 1;
+  // @inject_tags: `rostype:"uint32[]" rosname:"data"`
+  repeated uint32 data = 2;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message UInt64 {
+  // @inject_tags: `rostype:"uint64" rosname:"data"`
+  uint64 data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message UInt64MultiArray {
+  // @inject_tags: `rostype:"MultiArrayLayout" rosname:"layout"`
+  MultiArrayLayout layout = 1;
+  // @inject_tags: `rostype:"uint64[]" rosname:"data"`
+  repeated uint64 data = 2;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message UInt8 {
+  // @inject_tags: `rostype:"uint8" rosname:"data"`
+  uint32 data = 1;
+}
+
+// @inject_field: msg.Package `ros:"std_msgs"`
+message UInt8MultiArray {
+  // @inject_tags: `rostype:"MultiArrayLayout" rosname:"layout"`
+  MultiArrayLayout layout = 1;
+  // @inject_tags: `rostype:"uint8[]" rosname:"data"`
+  repeated uint32 data = 2;
+}
+

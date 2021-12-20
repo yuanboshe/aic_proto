@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/ros_msgs/diagnostic_msgs";
+package diagnostic_msgs;
+
+import "std_msgs.proto";
+
+// @inject_field: msg.Package `ros:"diagnostic_msgs"`
+message DiagnosticArray {
+  // @inject_tags: `rostype:"Header" rosname:"header"`
+  std_msgs.Header header = 1;
+  // @inject_tags: `rostype:"DiagnosticStatus[]" rosname:"status"`
+  repeated DiagnosticStatus status = 2;
+}
+
+// @inject_field: msg.Package `ros:"diagnostic_msgs"`
+// @inject_field: msg.Definitions `ros:"byte STALE=3"`
+message DiagnosticStatus {
+  // @inject_tags: `rostype:"byte" rosname:"level"`
+  int32 level = 1;
+  // @inject_tags: `rostype:"string" rosname:"name"`
+  string name = 2;
+  // @inject_tags: `rostype:"string" rosname:"message"`
+  string message = 3;
+  // @inject_tags: `rostype:"string" rosname:"hardware_id"`
+  string hardware_id = 4;
+  // @inject_tags: `rostype:"KeyValue[]" rosname:"values"`
+  repeated KeyValue values = 5;
+}
+
+// @inject_field: msg.Package `ros:"diagnostic_msgs"`
+message KeyValue {
+  // @inject_tags: `rostype:"string" rosname:"key"`
+  string key = 1;
+  // @inject_tags: `rostype:"string" rosname:"value"`
+  string value = 2;
+}
+

@@ -1,0 +1,134 @@
+syntax = "proto3";
+
+option go_package = "aic_proto/go/msgs";
+package msgs;
+
+import "google/protobuf/timestamp.proto";
+import "msgs/common_msgs.proto";
+
+//任务模板
+message Template {
+  optional uint32 id = 1 [
+    (column) = "id",
+    (data_type) = "unsigned"
+  ];                                    // id不可设置，数据库自增
+  google.protobuf.Timestamp update = 2; //更新时间
+  optional string name = 3 [
+    (column) = "name",
+    (data_type) = "char[47]"
+  ]; //名字是唯一标识，不能重复，用于系统根据模板名字自动生成任务
+  optional string title = 4 [
+    (column) = "title",
+    (data_type) = "char[47]"
+  ]; //显示名，可编辑
+  optional string description = 5 [
+    (column) = "description",
+    (data_type) = "char[1001]"
+  ]; //树的描述
+  optional string root = 6 [
+    (column) = "root",
+    (data_type) = "char[47]"
+  ]; //根节点的id
+  repeated Property properties = 7 [
+    (column) = "properties",
+    (data_type) = "varchar_long"
+  ]; //属性
+  repeated Node nodes = 8 [
+    (column) = "nodes",
+    (data_type) = "varchar_long"
+  ]; //所有节点的数组
+  //考虑到OTL的bool转换，暂时屏蔽该功能 TODO:启用
+  bool custom = 9; // true表示允许修改，false则不允许修改，表示内置的模板
+
+  //模板类型
+  enum Type {
+    UNKNOWN = 0;
+    MANUAL = 1;
+    FAVOR = 2;
+    AUTO = 3;
+  }
+}
+message TemplateList {
+  repeated Template templates = 1 [ (table_name) = "Template" ];
+}
+
+//任务
+message Task {
+  optional uint32 id = 1 [
+    (column) = "id",
+    (data_type) = "unsigned"
+  ];                                    // id不可设置，数据库自增
+  google.protobuf.Timestamp update = 2; //更新时间
+  optional string name = 3 [
+    (column) = "name",
+    (data_type) = "char[47]"
+  ]; //非唯一，可以为空，对应模板的名字，表示从哪个模板生成的任务
+  optional string title = 4 [
+    (column) = "title",
+    (data_type) = "char[47]"
+  ]; //显示名，可编辑
+  optional string description = 5 [
+    (column) = "description",
+    (data_type) = "char[1001]"
+  ]; //树的描述
+  optional string root = 6 [
+    (column) = "root",
+    (data_type) = "char[47]"
+  ]; //根节点的id
+  repeated Property properties = 7 [
+    (column) = "properties",
+    (data_type) = "varchar_long"
+  ]; //属性
+  repeated Node nodes = 8 [
+    (column) = "nodes",
+    (data_type) = "varchar_long"
+  ]; //所有节点的数组
+  optional uint32 robot_id = 9 [
+    (column) = "robot_id",
+    (data_type) = "unsigned"
+  ]; //如果任务已经分配给机器人，则填写机器人id
+  Status status = 10 [
+    (column) = "status",
+    (data_type) = "int"
+  ]; //任务状态
+  repeated string finished_nodes = 11 [
+    (column) = "finished_nodes",
+    (data_type) = "varchar_long"
+  ]; //已经完成的任务
+
+  //任务状态
+  enum Status {
+    UNKNOWN = 0;    //未知
+    UNASSIGNED = 1; //待分配
+    ASSIGNED = 2;   //待执行
+    EXECUTING = 3;  //执行中
+    COMPLETED = 4;  //已完成
+    CANCELED = 5;   //已取消
+    FAILED = 6;     //已失败
+  }
+}
+message TaskList {
+  repeated Task tasks = 1 [ (table_name) = "Task" ];
+}
+
+//行为树的节点
+message Node {
+  string id = 1; // 字符串id，编辑任务时设置，用于从JSON里面快速查找对象
+  string name = 2;        //节点名，不可编辑，判断行为逻辑用
+  string title = 3;       //显示名，可编辑，用于界面显示
+  string description = 4; //节点描述，可编辑，用于界面显示
+  repeated Property properties =
+      5;         //节点属性，属性key不可编辑，值可编辑
+  Type type = 6; //节点类型，不可编辑，用于界面显示
+  Point2D display = 7; //在界面上的显示坐标
+  repeated string childrens = 8;  //子节点的id
+
+  //节点类别
+  enum Type {
+    UNKNOWN = 0;   //未知
+    ACTION = 1;    //动作节点
+    CONTROL = 2;   //控制节点
+    CONDITION = 3; //条件节点
+    DECORATOR = 4; //修饰节点
+  }
+}
